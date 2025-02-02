@@ -1,0 +1,13 @@
+<h1>Welcome to Polls!</h1>
+<h2>View questions or explore questions by topic.</h2>
+<h3><a href = "{% url  'polls:questions' %}">Questions</a></h3>
+<h3>Topics:</h3>
+{% if topic_list %}
+    <ul>
+        {% for topic in topic_list %}
+        <li><a href = "{% url 'polls:topic' topic.id %}">{{ topic.topic_name }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>There are no topics to display</p>
+{% endif %}

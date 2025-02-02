@@ -1,0 +1,11 @@
+#btn {
+    border-radius: 8px;
+    width: 100px;
+    height: 20px;
+    background-color: darkgreen;
+    color: white;
+}
+
+#minecraft #questions {
+    display: none;
+}
