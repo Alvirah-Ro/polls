@@ -1,3 +1,8 @@
+"""
+Admin configuration for the aria_music app.
+"""
+
+
 from django.contrib import admin
 from .models import Topic, Question, Choice
 # Register your models here.
