@@ -3,7 +3,7 @@ View definitions for the Polls App
 """
 
 from django.shortcuts import render, get_object_or_404
-from django.db.models import F, Max, Count
+from django.db.models import F, Sum
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
@@ -61,9 +61,8 @@ def question_view(request):
     """This View displays lists questions based on various parameters"""
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
     earliest_question_list = Question.objects.order_by("pub_date")[:5]
-    max_votes = Choice.objects.aggregate(Max("votes"))["votes__max"]
-    Choice.objects.aggregate("votes")
-    most_popular_question_list = Question.objects.order_by("votes")[:5]
+    questions = Question.objects.annotate(total_votes=Sum('choice__votes'))
+    most_popular_question_list = questions.order_by('-total_votes')[:5]
     context = {
         "latest_question_list": latest_question_list,
         "earliest_question_list": earliest_question_list,
