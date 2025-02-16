@@ -3,7 +3,7 @@ View definitions for the Polls App
 """
 
 from django.shortcuts import render, get_object_or_404
-from django.db.models import F
+from django.db.models import F, Max, Count
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
@@ -12,7 +12,7 @@ from .models import Topic, Question, Choice
 # Create your views here.
 
 class IndexView(generic.ListView):
-    """View for main page"""
+    """This View is for the main page"""
     template_name = "polls/index.html"
     context_object_name = "topic_list"
 
@@ -20,8 +20,9 @@ class IndexView(generic.ListView):
         """Return a list of all topics"""
         return Topic.objects.all()
 
+
 def topic_view(request, pk):
-    """View for all questions of a particular topic"""
+    """This View lists all questions for a particular topic"""
     # Get the Topic object by its primary key (pk)
     topic = get_object_or_404(Topic, pk=pk)
 
@@ -45,24 +46,28 @@ def topic_view(request, pk):
 
 
 class DetailView(generic.DetailView):
-    """View for details of a question with voting choices"""
+    """This View displays details of a question with voting choices"""
     model = Question
     template_name = "polls/detail.html"
 
 
 class ResultsView(generic.DetailView):
-    """View that displays all voting results for a question"""
+    """This View displays all voting results for a question"""
     model = Question
     template_name = "polls/results.html"
 
 
 def question_view(request):
-    """View that lists questions based on date published"""
+    """This View displays lists questions based on various parameters"""
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
     earliest_question_list = Question.objects.order_by("pub_date")[:5]
+    max_votes = Choice.objects.aggregate(Max("votes"))["votes__max"]
+    Choice.objects.aggregate("votes")
+    most_popular_question_list = Question.objects.order_by("votes")[:5]
     context = {
         "latest_question_list": latest_question_list,
         "earliest_question_list": earliest_question_list,
+        "most_popular_question_list": most_popular_question_list
     }
     return render(request, "polls/questions.html", context)
 

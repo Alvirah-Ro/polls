@@ -5,7 +5,8 @@ URL paths for the Polls App
 from django.urls import path
 from . import views
 
-APP_NAME = "polls"
+app_name = "polls"
+
 urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
     path("<int:pk>/topic/", views.topic_view, name="topic"),
