@@ -1,10 +1,15 @@
-from django.test import TestCase
+"""
+Tests for the Polls App
+"""
+
 import datetime
+from django.test import TestCase
 from django.utils import timezone
 
 from .models import Question
 # Create your tests here.
 class QuestionModelTests(TestCase):
+    """Tests for Question Model"""
     def test_was_published_recently_with_future_question(self):
         """
         was_published_recently() returns False for

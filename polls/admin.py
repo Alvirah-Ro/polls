@@ -1,5 +1,5 @@
 """
-Admin configuration for the aria_music app.
+Admin configuration for the Polls App.
 """
 
 
