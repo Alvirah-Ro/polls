@@ -1,0 +1,39 @@
+<form action="{% url 'polls:add_question' %}" method="post">
+
+    {% csrf_token %}
+
+    <fieldset>
+
+        <legend>
+            <h1>Submit new questions here:</h1>
+            <p>Enter question text and 2-5 possible answer options.</p>
+        </legend>
+
+        <input type="text" name="question_text" id="question" value="{{ question.question_text }}">
+        <label for="question_text">Question Text</label>
+        <br>
+
+        <select name="topic" multiple>
+            {% for topic in topics %}
+            <option value="{{ topic.id }}">{{ topic.topic_name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <input type="text" name="choice" id="choice" value="{{ choice.choice_text }}" required>
+        <label for="choice">Possible Answer</label>
+        <input type="text" name="choice" id="choice" value="{{ choice.choice_text }}" required>
+        <label for="choice">Possible Answer</label>
+        <input type="text" name="choice" id="choice" value="{{ choice.choice_text }}">
+        <label for="choice">Possible Answer</label>
+        <input type="text" name="choice" id="choice" value="{{ choice.choice_text }}">
+        <label for="choice">Possible Answer</label>
+        <input type="text" name="choice" id="choice" value="{{ choice.choice_text }}">
+        <label for="choice">Possible Answer</label>
+        <br>
+
+    </fieldset>
+
+    <input type="submit" value="add_question">
+
+</form>

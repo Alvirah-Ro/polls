@@ -36,15 +36,6 @@ def topic_view(request, pk):
     })
 
 
-#class QuestionsView(generic.ListView):
-#    template_name = "polls/questions.html"
-#    context_object_name = "latest_question_list"
-
-#    def get_queryset(self):
-#        """Return the last five published questions."""
-#        return Question.objects.order_by("-pub_date")[:5]
-
-
 class DetailView(generic.DetailView):
     """This View displays details of a question with voting choices"""
     model = Question
@@ -71,18 +62,8 @@ def question_view(request):
     return render(request, "polls/questions.html", context)
 
 
-#def detail(request, question_id):
-#    question = get_object_or_404(Question, pk=question_id)
-#    return render(request, "polls/detail.html", {"question": question})
-
-
-#def results(request, question_id):
-#    question = get_object_or_404(Question, pk=question_id)
-#    return render(request, "polls/results.html", {"question": question})
-
-
 def vote(request, question_id):
-    """View for users to submit a vote on a question"""
+    """This View allows users to submit a vote on a question"""
     question = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST["choice"])
@@ -103,3 +84,69 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+
+
+def add_question(request):
+    """This View allows users to submit a new question"""
+    if request.method == "POST":
+        question_text = request.POST.get("question_text")
+        topic_ids = request.POST.getlist("topic") #getlist() for multiple topics
+        choice_texts = request.POST.getlist("choice") #getlist() for multiple choices
+
+        # Check if all required fields are filled
+        if not question_text or not topic_ids or not choice_texts:
+            return render(
+                request,
+                "polls/add_question.html",
+                {
+                    "error_message": "You didn't select all required fields.",
+                },
+            )
+
+        # Create the Question instance
+        question = Question.objects.create(
+            question_text=question_text,
+            pub_date=timezone.now()
+        )
+
+        # Add topics to the Question
+        topics = Topic.objects.filter(id__in=topic_ids)
+        question.topic.set(topics)
+
+        # Create Choice instances
+        for choice_text in choice_texts:
+            Choice.objects.create(
+                question=question,
+                choice_text=choice_text,
+                votes=0
+            )
+
+        # Redirect to index page after successful submission
+        return redirect(reverse("polls:index"))
+
+    # If request method is GET, render the form
+    return render(request, "polls/add_question.html")
+
+
+
+
+#class QuestionsView(generic.ListView):
+    #"""This is an alternate view for displaying a list of questions"""
+#    template_name = "polls/questions.html"
+#    context_object_name = "latest_question_list"
+
+#    def get_queryset(self):
+#        """Return the last five published questions."""
+#        return Question.objects.order_by("-pub_date")[:5]
+
+
+    #def detail(request, question_id):
+    #"""This is an alternate view for displaying question details"""
+#    question = get_object_or_404(Question, pk=question_id)
+#    return render(request, "polls/detail.html", {"question": question})
+
+
+#def results(request, question_id):
+    #"""This is an alternate view for displaying voting results"""
+#    question = get_object_or_404(Question, pk=question_id)
+#    return render(request, "polls/results.html", {"question": question})
