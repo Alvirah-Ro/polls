@@ -2,11 +2,12 @@
 View definitions for the Polls App
 """
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import F, Sum
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
+from django.utils import timezone
 
 from .models import Topic, Question, Choice
 # Create your views here.
@@ -88,6 +89,8 @@ def vote(request, question_id):
 
 def add_question(request):
     """This View allows users to submit a new question"""
+    topics = Topic.objects.all() # Retrieve topics from the database
+
     if request.method == "POST":
         question_text = request.POST.get("question_text")
         topic_ids = request.POST.getlist("topic") #getlist() for multiple topics
@@ -95,12 +98,9 @@ def add_question(request):
 
         # Check if all required fields are filled
         if not question_text or not topic_ids or not choice_texts:
-            return render(
-                request,
-                "polls/add_question.html",
-                {
-                    "error_message": "You didn't select all required fields.",
-                },
+            return render(request, "polls/add_question.html", {
+                    "error_message": "You didn't select all required fields."
+                }
             )
 
         # Create the Question instance
@@ -109,11 +109,10 @@ def add_question(request):
             pub_date=timezone.now()
         )
 
-        # Add topics to the Question
-        topics = Topic.objects.filter(id__in=topic_ids)
-        question.topic.set(topics)
+        # Add topics to the Question (ManyToManyField)
+        question.topic.set(Topic.objects.filter(id__in=topic_ids))
 
-        # Create Choice instances
+        # Create Choices linked to the question
         for choice_text in choice_texts:
             Choice.objects.create(
                 question=question,
@@ -125,7 +124,7 @@ def add_question(request):
         return redirect(reverse("polls:index"))
 
     # If request method is GET, render the form
-    return render(request, "polls/add_question.html")
+    return render(request, "polls/add_question.html", {"topics": topics})
 
 
 
