@@ -93,8 +93,9 @@ def add_question(request):
 
     if request.method == "POST":
         question_text = request.POST.get("question_text")
-        topic_ids = request.POST.getlist("topic") #getlist() for multiple topics
-        choice_texts = request.POST.getlist("choice") #getlist() for multiple choices
+        topic_ids = request.POST.getlist("topic") # getlist() for multiple topics
+        choice_texts = request.POST.getlist("choice") # getlist() for multiple choices
+        filtered_choices = [choice for choice in choice_texts if choice.strip()] # Filter to remove empty choices
 
         # Check if all required fields are filled
         if not question_text or not topic_ids or not choice_texts:
@@ -113,7 +114,7 @@ def add_question(request):
         question.topic.set(Topic.objects.filter(id__in=topic_ids))
 
         # Create Choices linked to the question
-        for choice_text in choice_texts:
+        for choice_text in filtered_choices:
             Choice.objects.create(
                 question=question,
                 choice_text=choice_text,

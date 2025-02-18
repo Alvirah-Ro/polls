@@ -8,3 +8,5 @@
     {% else %}
         <p>There are no questions about {{ question.topic.topic_name }}.</p>
 {% endif %}
+
+<p><a href="{% url 'polls:index' %}">Back to all Questions</a></p>
