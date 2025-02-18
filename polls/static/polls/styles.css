@@ -1,0 +1,20 @@
+button {
+    border-radius: 4px;
+    width: 300px;
+    height: 50px;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+#question1btn {
+    background-color: orangered;
+}
+
+#question2btn {
+    background-color: hotpink;
+}
+
+#question3btn {
+    background-color: blueviolet;
+}

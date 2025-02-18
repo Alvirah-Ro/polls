@@ -3,12 +3,13 @@
 
 <head>
     {% load static %}
-    <link rel="stylesheet" href="static/mystyles.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}">
 </head>
 
 <body>
     <p>The most popular questions are:</p>
-    <div id="question">
+    <button for="question1" id="question1btn" onclick="showQuestions('question1')">Most popular questions</button>
+    <div class="question" id="question1" style="display: none;">
         {% if most_popular_question_list %}
         <ul>
             {% for question in most_popular_question_list %}
@@ -21,8 +22,8 @@
     </div>
 
     <p>The latest questions are:</p>
-    <!--<button id="btn" onclick="showQuestions">Click Here</button>-->
-    <div id="questions">
+    <button for="question2" id="question2btn" onclick="showQuestions('question2')">Most recent questions</button>
+    <div  class="question" id="question2" style="display: none;">
         {% if latest_question_list %}
         <ul>
             {% for question in latest_question_list %}
@@ -35,6 +36,8 @@
     </div>
 
     <p>The oldest questions are:</p>
+    <button for="question3" id="question3btn" onclick="showQuestions('question3')">Oldest questions</button>
+    <div  class="question" id="question3" style="display: none;"
     {% if earliest_question_list %}
     <ul>
         {% for question in earliest_question_list %}
@@ -48,8 +51,8 @@
 
     <script>
 
-        function showQuestions() {
-            let q = document.getElementById("questions")
+        function showQuestions(questionId) {
+            let q = document.getElementById(questionId);
             if (q.style.display === "none") {
                 q.style.display = "block";
             } else {
@@ -57,16 +60,8 @@
             }
         }
 
-
-        function showMinecraft() {
-            let m = document.getElementById("minecraft")
-            if (m.style.display === "none") {
-                m.style.display = "block";
-            } else {
-                m.style.display = "none";
-            }
-        }
     </script>
+
 </body>
 
 </html>
