@@ -7,8 +7,10 @@
 </head>
 
 <body>
-    <p>The most popular questions are:</p>
-    <button for="question1" id="question1btn" onclick="showQuestions('question1')">Most popular questions</button>
+    <h1>Question Categories</h1>
+
+    <h3>Most Popular Questions:</h3>
+    <button for="question1" id="question1btn" onclick="showQuestions('question1')">Click Here</button>
     <div class="question" id="question1" style="display: none;">
         {% if most_popular_question_list %}
         <ul>
@@ -21,8 +23,8 @@
         {% endif %}
     </div>
 
-    <p>The latest questions are:</p>
-    <button for="question2" id="question2btn" onclick="showQuestions('question2')">Most recent questions</button>
+    <h3>Most Recent Questions:</h3>
+    <button for="question2" id="question2btn" onclick="showQuestions('question2')">Click Here</button>
     <div  class="question" id="question2" style="display: none;">
         {% if latest_question_list %}
         <ul>
@@ -35,8 +37,8 @@
         {% endif %}
     </div>
 
-    <p>The oldest questions are:</p>
-    <button for="question3" id="question3btn" onclick="showQuestions('question3')">Oldest questions</button>
+    <h3>Oldest Questions:</h3>
+    <button for="question3" id="question3btn" onclick="showQuestions('question3')">Click Here</button>
     <div  class="question" id="question3" style="display: none;"
     {% if earliest_question_list %}
     <ul>
@@ -48,6 +50,23 @@
     {% else %}
     <p>No polls are available</p>
     {% endif %}
+
+    <h3>View All Questions:</h3>
+    <button for="question4" id="question4btn" onclick="showQuestions('question4')">Click Here</button>
+    <div  class="question" id="question4" style="display: none;"
+    {% if all_question_list %}
+    <ul>
+        {% for question in all_question_list %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        {% endfor %}
+    </ul>
+    </div>
+    {% else %}
+    <p>No polls are available</p>
+    {% endif %}
+
+
+    <p><a href="{% url 'polls:index' %}">Back to Home Page</a></p>
 
     <script>
 
@@ -66,4 +85,3 @@
 
 </html>
 
-<p><a href="{% url 'polls:index' %}">Back to all Questions</a></p>

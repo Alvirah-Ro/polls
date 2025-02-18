@@ -18,3 +18,13 @@ button {
 #question3btn {
     background-color: blueviolet;
 }
+
+#question4btn {
+    background-color: royalblue;
+}
+
+.welcome {
+    text-align: center;
+    background-color: yellow;
+    padding: 20px 0;
+}

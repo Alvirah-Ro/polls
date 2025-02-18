@@ -1,7 +1,15 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}">
+
+<div class="welcome">
 <h1>Welcome to Polls!</h1>
-<h2>View questions or explore questions by topic.</h2>
-<h3><a href = "{% url  'polls:questions' %}">Questions</a></h3>
-<h3>Topics:</h3>
+<br>
+<h2>View questions by categories or topics and vote on your favorite questions.</h2>
+</div>
+
+<div class=""
+<h3><a href = "{% url  'polls:questions' %}">Question Categories</a></h3>
+<h3>Question Topics:</h3>
 {% if topic_list %}
     <ul>
         {% for topic in topic_list %}

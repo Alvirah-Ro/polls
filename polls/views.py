@@ -53,11 +53,13 @@ def question_view(request):
     """This View displays lists questions based on various parameters"""
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
     earliest_question_list = Question.objects.order_by("pub_date")[:5]
+    all_question_list = Question.objects.all()
     questions = Question.objects.annotate(total_votes=Sum('choice__votes'))
     most_popular_question_list = questions.order_by('-total_votes')[:5]
     context = {
         "latest_question_list": latest_question_list,
         "earliest_question_list": earliest_question_list,
+        "all_question_list": all_question_list,
         "most_popular_question_list": most_popular_question_list
     }
     return render(request, "polls/questions.html", context)
@@ -95,7 +97,8 @@ def add_question(request):
         question_text = request.POST.get("question_text")
         topic_ids = request.POST.getlist("topic") # getlist() for multiple topics
         choice_texts = request.POST.getlist("choice") # getlist() for multiple choices
-        filtered_choices = [choice for choice in choice_texts if choice.strip()] # Filter to remove empty choices
+        filtered_choices = [choice for choice in choice_texts if choice.strip()]
+        # Filter to remove empty choices
 
         # Check if all required fields are filled
         if not question_text or not topic_ids or not choice_texts:
