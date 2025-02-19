@@ -1,11 +1,17 @@
 body {
     background-color: lemonchiffon;
-    font-family: "Kalam";
-    text-align: center;
+    font-family: "Poppins";
 }
 
 h1 {
-    font-family: "Protest Riot";
+    font-family: "Kalam";
+    font-size: 50px;
+    margin: 32px 0 0 0;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: "Kalam";
+    margin: 0 0 20px 0;
 }
 
 button {
@@ -54,5 +60,11 @@ button {
 .welcome {
     text-align: center;
     background-color: orange;
-    padding: 20px 0;
+    padding: 10px 0;
+}
+
+.options {
+    padding: 20px;
+    display: grid;
+    justify-items: center;
 }
