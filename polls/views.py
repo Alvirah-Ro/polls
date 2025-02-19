@@ -101,10 +101,28 @@ def add_question(request):
         filtered_choices = [choice for choice in choice_texts if choice.strip()]
         # Filter to remove empty choices
 
-        # Check if all required fields are filled
-        if not question_text or not topic_ids or not choice_texts:
+        # Make sure at least 2 choices were entered
+        if len(filtered_choices) < 2:
             return render(request, "polls/add_question.html", {
-                    "error_message": "You didn't select all required fields."
+                "topics": topics,
+                "error_message": "You must provice at least two choices.",
+                "question_text": question_text,
+                "selected_topic_ids": topic_ids,
+                "new_topic": topic_name,
+                "choices": choice_texts,
+                }
+            )
+
+        # Check if all required fields are filled
+        if not question_text or not topic_ids:
+            return render(request, "polls/add_question.html", {
+                "topics": topics,
+                "error_message": "You didn't select all required fields.",
+                "question_text": question_text,
+                "selected_topic_ids": topic_ids,
+                "new_topic": topic_name,
+                "choices": choice_texts,
+
                 }
             )
 
@@ -116,14 +134,27 @@ def add_question(request):
 
         # Add any new topics
         if topic_name:
-            topic, created = Topic.objects.get_or_create(
-            topic_name=topic_name,
-            defaults={'pub_date':timezone.now()}
-        )
-        topic_ids.append(topic.id)
+            topic, _ = Topic.objects.get_or_create(
+                topic_name=topic_name,
+                pub_date=timezone.now())
+            topic_ids.append(str(topic.id))
 
-        # Add topics to the Question (ManyToManyField)
-        question.topic.set(Topic.objects.filter(id__in=topic_ids))
+        if topic_ids:
+            question.topic.set(Topic.objects.filter(id__in=topic_ids))
+
+
+        # if topic_name:
+        #     topic, created = Topic.objects.get_or_create(
+        #     topic_name=topic_name,
+        #     defaults={'pub_date':timezone.now()}
+        # )
+        # if created:
+        #     topic_ids.append(topic.id)
+        #     question.topic.set(Topic.objects.filter(id__in=topic_ids))
+
+        # else:
+        #     # Add topics to the Question (ManyToManyField)
+        #     question.topic.set(Topic.objects.filter(id__in=topic_ids))
 
 
         # Create Choices linked to the question
