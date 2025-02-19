@@ -95,6 +95,7 @@ def add_question(request):
 
     if request.method == "POST":
         question_text = request.POST.get("question_text")
+        topic_name = request.POST.get("new_topic")
         topic_ids = request.POST.getlist("topic") # getlist() for multiple topics
         choice_texts = request.POST.getlist("choice") # getlist() for multiple choices
         filtered_choices = [choice for choice in choice_texts if choice.strip()]
@@ -110,6 +111,12 @@ def add_question(request):
         # Create the Question instance
         question = Question.objects.create(
             question_text=question_text,
+            pub_date=timezone.now()
+        )
+
+        # Add any new topics
+        topic = Topic.objects.create(
+            topic_name=topic_name,
             pub_date=timezone.now()
         )
 

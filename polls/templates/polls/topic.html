@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chicle;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
 {% if question_by_topic_list %}
     <h2>{{ topic.topic_name }}</h2>
     <ul>
@@ -6,7 +19,11 @@
         {% endfor %}
     </ul>
     {% else %}
-        <p>There are no questions about {{ question.topic.topic_name }}.</p>
+        <p>There are no questions about this topic.</p>
 {% endif %}
 
 <p><a href="{% url 'polls:index' %}">Back to all Questions</a></p>
+
+</body>
+
+</html>

@@ -1,5 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chicle;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
 
 <div class="welcome">
 <h1>Welcome to Polls!</h1>
@@ -7,7 +17,7 @@
 <h2>View questions by categories or topics and vote on your favorite questions.</h2>
 </div>
 
-<div class=""
+<div class="options"
 <h3><a href = "{% url  'polls:questions' %}">Question Categories</a></h3>
 <h3>Question Topics:</h3>
 {% if topic_list %}
@@ -19,4 +29,10 @@
 {% else %}
     <p>There are no topics to display</p>
 {% endif %}
+</div>
+
 <a href= "{% url 'polls:add_question' %}">Add a question</a>
+
+</body>
+
+</html>

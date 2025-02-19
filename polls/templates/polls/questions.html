@@ -1,69 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chicle;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
     <h1>Question Categories</h1>
+    <div class="categories">
+        <h3>Most Popular Questions:</h3>
+        <button for="question1" id="question1btn" onclick="showQuestions('question1')">Click Here</button>
+        <div class="question" id="question1" style="display: none;">
+            {% if most_popular_question_list %}
+            <ul>
+                {% for question in most_popular_question_list %}
+                <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>There are no popular questions.</p>
+            {% endif %}
+        </div>
 
-    <h3>Most Popular Questions:</h3>
-    <button for="question1" id="question1btn" onclick="showQuestions('question1')">Click Here</button>
-    <div class="question" id="question1" style="display: none;">
-        {% if most_popular_question_list %}
-        <ul>
-            {% for question in most_popular_question_list %}
+        <h3>Most Recent Questions:</h3>
+        <button for="question2" id="question2btn" onclick="showQuestions('question2')">Click Here</button>
+        <div class="question" id="question2" style="display: none;">
+            {% if latest_question_list %}
+            <ul>
+                {% for question in latest_question_list %}
+                <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No polls are available.</p>
+            {% endif %}
+        </div>
+
+        <h3>Oldest Questions:</h3>
+        <button for="question3" id="question3btn" onclick="showQuestions('question3')">Click Here</button>
+        <div class="question" id="question3" style="display: none;" {% if earliest_question_list %} <ul>
+            {% for question in earliest_question_list %}
             <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
             {% endfor %}
-        </ul>
+            </ul>
+        </div>
         {% else %}
-        <p>There are no popular questions.</p>
+        <p>No polls are available</p>
         {% endif %}
-    </div>
 
-    <h3>Most Recent Questions:</h3>
-    <button for="question2" id="question2btn" onclick="showQuestions('question2')">Click Here</button>
-    <div  class="question" id="question2" style="display: none;">
-        {% if latest_question_list %}
-        <ul>
-            {% for question in latest_question_list %}
+        <h3>View All Questions:</h3>
+        <button for="question4" id="question4btn" onclick="showQuestions('question4')">Click Here</button>
+        <div class="question" id="question4" style="display: none;" {% if all_question_list %} <ul>
+            {% for question in all_question_list %}
             <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
             {% endfor %}
-        </ul>
+            </ul>
+        </div>
         {% else %}
-        <p>No polls are available.</p>
+        <p>No polls are available</p>
         {% endif %}
-    </div>
 
-    <h3>Oldest Questions:</h3>
-    <button for="question3" id="question3btn" onclick="showQuestions('question3')">Click Here</button>
-    <div  class="question" id="question3" style="display: none;"
-    {% if earliest_question_list %}
-    <ul>
-        {% for question in earliest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-        {% endfor %}
-    </ul>
     </div>
-    {% else %}
-    <p>No polls are available</p>
-    {% endif %}
-
-    <h3>View All Questions:</h3>
-    <button for="question4" id="question4btn" onclick="showQuestions('question4')">Click Here</button>
-    <div  class="question" id="question4" style="display: none;"
-    {% if all_question_list %}
-    <ul>
-        {% for question in all_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-        {% endfor %}
-    </ul>
-    </div>
-    {% else %}
-    <p>No polls are available</p>
-    {% endif %}
 
 
     <p><a href="{% url 'polls:index' %}">Back to Home Page</a></p>
@@ -84,4 +86,3 @@
 </body>
 
 </html>
-

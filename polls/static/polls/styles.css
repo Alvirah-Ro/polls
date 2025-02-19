@@ -1,3 +1,14 @@
+.chicle-regular {
+    font-family: "Chicle", serif;
+    font-weight: 400;
+    font-style: normal;
+}  
+
+body {
+    background-color: peachpuff;
+    font-family: Chicle;
+}
+
 button {
     border-radius: 4px;
     width: 300px;
@@ -5,6 +16,11 @@ button {
     color: white;
     font-size: 1.2em;
     cursor: pointer;
+}
+
+.question {
+    border-style: solid;
+    border-color: black;
 }
 
 #question1btn {
@@ -25,6 +41,6 @@ button {
 
 .welcome {
     text-align: center;
-    background-color: yellow;
+    background-color: orange;
     padding: 20px 0;
 }

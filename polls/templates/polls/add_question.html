@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chicle;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
 <form action="{% url 'polls:add_question' %}" method="POST">
 
     {% csrf_token %}
@@ -13,12 +27,15 @@
         <input type="text" name="question_text" id="question" required>
         <br>
         
-        <label for="topic">Topics:</label>
+        <label for="topic">Topics: select all that apply</label>
         <select name="topic" multiple>
             {% for topic in topics %}
                 <option value="{{ topic.id }}">{{ topic.topic_name }}</option>
             {% endfor %}
         </select>
+
+        <label for="new_topic">Or add a new topic</label>
+        <input type="text" name="new_topic" id="new_topic">
         <br>
 
         <label for="choice1">Possible Answers:</label>
@@ -36,3 +53,7 @@
 </form>
 
 <p><a href="{% url 'polls:index' %}">Back to all Questions</a></p>
+
+</body>
+
+</html>
