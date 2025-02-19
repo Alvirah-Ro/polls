@@ -115,13 +115,16 @@ def add_question(request):
         )
 
         # Add any new topics
-        topic = Topic.objects.create(
+        if topic_name:
+            topic, created = Topic.objects.get_or_create(
             topic_name=topic_name,
-            pub_date=timezone.now()
+            defaults={'pub_date':timezone.now()}
         )
+        topic_ids.append(topic.id)
 
         # Add topics to the Question (ManyToManyField)
         question.topic.set(Topic.objects.filter(id__in=topic_ids))
+
 
         # Create Choices linked to the question
         for choice_text in filtered_choices:
