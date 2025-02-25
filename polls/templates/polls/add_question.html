@@ -2,57 +2,59 @@
 <html lang="en">
 
 <head>
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Protest+Riot&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Protest+Riot&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
 
-<form action="{% url 'polls:add_question' %}" method="POST">
+    <form action="{% url 'polls:add_question' %}" method="POST">
 
-    {% csrf_token %}
+        {% csrf_token %}
 
-    <fieldset>
+        <fieldset>
 
-        <legend>
-            <h2>Submit new questions here:</h2>
-            <p>Enter question text and 2-5 possible answer options.</p>
-        </legend>
+            <legend>
+                <h1>Submit new questions here:</h1>
+            </legend>
+            <div class="field">
+                <p>Enter question text and 2-5 possible answer options.</p>
+                <label for="question_text">Question Text</label>
+                <input type="text" name="question_text" id="question" required>
+                <br>
 
-        <label for="question_text">Question Text</label>
-        <input type="text" name="question_text" id="question" required>
-        <br>
-        
-        <label for="topic">Topics: select all that apply</label>
-        <select name="topic" multiple>
-            {% for topic in topics %}
-                <option value="{{ topic.id }}">{{ topic.topic_name }}</option>
-            {% endfor %}
-        </select>
+                <label for="topic">Topics: select all that apply</label>
+                <select name="topic" multiple>
+                    {% for topic in topics %}
+                    <option value="{{ topic.id }}">{{ topic.topic_name }}</option>
+                    {% endfor %}
+                </select>
 
-        <label for="new_topic">Or add a new topic</label>
-        <input type="text" name="new_topic" id="new_topic">
-        <br>
+                <label for="new_topic">Or add a new topic</label>
+                <input type="text" name="new_topic" id="new_topic">
+                <br>
 
-        <label for="choice1">Possible Answers:</label>
-        <input type="text" name="choice" id="choice1" required>
-        <input type="text" name="choice" id="choice2" required>
-        <input type="text" name="choice" id="choice3">
-        <input type="text" name="choice" id="choice4">
-        <input type="text" name="choice" id="choice5">
-        <br>
+                <label for="choice1">Possible Answers:</label>
+                <input type="text" name="choice" id="choice1" required>
+                <input type="text" name="choice" id="choice2" required>
+                <input type="text" name="choice" id="choice3">
+                <input type="text" name="choice" id="choice4">
+                <input type="text" name="choice" id="choice5">
+                <br>
+            </div>
+        </fieldset>
 
-    </fieldset>
+        <button type="submit" value="add_question" id="btn">Submit</button>
 
-    <button type="submit" value="add_question">Submit</button> 
+    </form>
 
-</form>
-
-<p><a href="{% url 'polls:index' %}">Back to all Questions</a></p>
+    <p class="homelink"><a href="{% url 'polls:index' %}">Back to all Questions</a></p>
 
 </body>
 

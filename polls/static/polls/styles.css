@@ -1,6 +1,7 @@
 body {
     background-color: #FFEADC;
     font-family: "Poppins";
+    line-height: 2;
 }
 
 h1 {
@@ -11,8 +12,16 @@ h1 {
 
 h2, h3, h4, h5, h6 {
     font-family: "Kalam";
-    margin: 0 0 20px 0;
     color: #18A2FF;
+}
+
+.welcome {
+    text-align: center;
+    background-color: #FF7518;
+    padding: 10px 0 20px 0;
+    border-style: solid;
+    border-color: black;
+    border-width: thick;
 }
 
 .welcome h1 {
@@ -38,7 +47,7 @@ button {
 
 .container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
 }
 
 .categories {
@@ -56,6 +65,7 @@ button {
 
 #categories {
     margin: 32px 0;
+    text-align: center;
 }
 
 #question1btn {
@@ -74,12 +84,6 @@ button {
     background-color: royalblue;
 }
 
-.welcome {
-    text-align: center;
-    background-color: #FF7518;
-    padding: 10px 0 20px 0;
-}
-
 .options {
     padding: 20px;
     display: grid;
@@ -92,7 +96,11 @@ fieldset {
     padding-bottom: 20px;
 }
 
-legend {
+.field {
+    margin-top: -30px;
+}
+
+legend h1, h2 {
     color: #18A2FF;
 }
 
@@ -136,3 +144,16 @@ a:hover {
 .topic h1 {
     margin: 0 0 0 20px;
 }
+
+.results {
+    border-style: solid;
+    border-color: #FF7518;
+    margin: 20px;
+    padding: 20px;
+}
+
+.results p {
+    color: black;
+    font-size: 20px;
+}
+
