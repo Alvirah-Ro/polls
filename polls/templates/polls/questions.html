@@ -14,19 +14,32 @@
 <body>
 
     <h1 id="categories">Question Categories</h1>
-    <div class="options">
-        <h3>Question Topics:</h3>
-        {% if topic_list %}
-        <ul>
-            {% for topic in topic_list %}
-            <li><a href="{% url 'polls:topic' topic.id %}">{{ topic.topic_name }}</a></li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p>There are no topics to display</p>
-        {% endif %}
+    <div class="container">
+        <div class="list">
+            <h3>Question Topics:</h3>
+            {% if topic_list %}
+            <ul>
+                {% for topic in topic_list %}
+                <li><a href="{% url 'polls:topic' topic.id %}">{{ topic.topic_name }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>There are no topics to display</p>
+            {% endif %}
+        </div>
+        <div class="list">
+            <h3>Question Lists:</h3>
+            {% if question_list_list %}
+            <ul>
+                {% for key, question_list in question_list_list.items %}
+                <li><a href="{% url 'polls:list' question_list %}">{{ key }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>There are no lists of questions to display</p>
+            {% endif %}
+        </div>
     </div>
-
     <div class="container">
 
         <div class="categories" style="background-color: rgb(250, 164, 132);">
