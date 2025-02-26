@@ -2,36 +2,43 @@
 <html lang="en">
 
 <head>
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Protest+Riot&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Protest+Riot&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
-<div class="welcome">
-<h1>Welcome to Polls!</h1>
-<br>
-<h2>View questions by categories or topics and vote on your favorite questions.</h2>
-</div>
+    <div class="welcome">
+        <h1>Welcome to Polls</h1>
+    </div>
 
-<div class="options"
-<h3><a href = "{% url  'polls:questions' %}">Question Categories</a></h3>
-<h3>Question Topics:</h3>
-{% if topic_list %}
-    <ul>
-        {% for topic in topic_list %}
-        <li><a href = "{% url 'polls:topic' topic.id %}">{{ topic.topic_name }}</a></li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>There are no topics to display</p>
-{% endif %}
-</div>
+    <div class="welcome2">
+        <h2>Where voting is fun!</h2>
+    </div>
 
-<a href= "{% url 'polls:add_question' %}">Add a question</a>
+    <div class="recent" 
+    <h2>Most Recent Questions:</h2>
+
+        {% if latest_question_list %}
+        <ul>
+            {% for question in latest_question_list %}
+            <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No polls are available.</p>
+        {% endif %}
+    </div>
+    <div class="options">
+        <h3><a href="{% url  'polls:questions' %}">View All Question Categories</a></h3>
+    </div>
+
+    <a href="{% url 'polls:add_question' %}">Add a question</a>
 
 </body>
 

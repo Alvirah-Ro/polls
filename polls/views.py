@@ -12,15 +12,23 @@ from django.utils import timezone
 from .models import Topic, Question, Choice
 # Create your views here.
 
-class IndexView(generic.ListView):
+# class IndexView(generic.ListView):
+#     """This is an alternate View for the main page"""
+#     template_name = "polls/index.html"
+#     context_object_name = "topic_list"
+
+#     def get_queryset(self):
+#         """Return a list of all topics"""
+#         return Topic.objects.all()
+
+def index_view(request):
     """This View is for the main page"""
-    template_name = "polls/index.html"
-    context_object_name = "topic_list"
+    # Get the 5 most recently added questions
+    latest_question_list = Question.objects.order_by("-pub_date")[:5]
 
-    def get_queryset(self):
-        """Return a list of all topics"""
-        return Topic.objects.all()
-
+    return render (request, 'polls/index.html', {
+        "latest_question_list": latest_question_list,
+    })
 
 def topic_view(request, pk):
     """This View lists all questions for a particular topic"""
@@ -56,11 +64,14 @@ def question_view(request):
     all_question_list = Question.objects.all()
     questions = Question.objects.annotate(total_votes=Sum('choice__votes'))
     most_popular_question_list = questions.order_by('-total_votes')[:5]
+    topic_list = Topic.objects.all()
+
     context = {
         "latest_question_list": latest_question_list,
         "earliest_question_list": earliest_question_list,
         "all_question_list": all_question_list,
-        "most_popular_question_list": most_popular_question_list
+        "most_popular_question_list": most_popular_question_list,
+        "topic_list": topic_list
     }
     return render(request, "polls/questions.html", context)
 

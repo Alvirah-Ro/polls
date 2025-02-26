@@ -10,7 +10,11 @@ h1 {
     color: #18A2FF;
 }
 
-h2, h3, h4, h5, h6 {
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: "Kalam";
     color: #18A2FF;
 }
@@ -19,20 +23,15 @@ h2, h3, h4, h5, h6 {
     text-align: center;
     background-color: #FF7518;
     padding: 10px 0 20px 0;
-    border-style: solid;
-    border-color: black;
-    border-width: thick;
 }
 
 .welcome h1 {
-    margin: 32px 0 0 0;
     text-align: center;
     color: black;
 }
 
-.welcome h2 {
+.welcome2 {
     text-align: center;
-    color: black;
 }
 
 button {
@@ -90,6 +89,23 @@ button {
     justify-items: center;
 }
 
+.options a {
+    color: #FF182F;
+    padding: 20px 0;
+}
+
+.recent {
+    margin: 20px;
+    padding: 20px;
+    border-style: solid;
+    border-color: #FF7518;
+    line-height: 2;
+}
+
+.recent h2 {
+    color: #18A2FF;
+}
+
 fieldset {
     border-color: #FF7518;
     margin: 20px 0;
@@ -100,7 +116,8 @@ fieldset {
     margin-top: -30px;
 }
 
-legend h1, h2 {
+legend h1,
+h2 {
     color: #18A2FF;
 }
 
@@ -125,7 +142,7 @@ a:hover {
 }
 
 .homelink a {
-    color:#FF182F;
+    color: #FF182F;
     padding: 20px 0;
 }
 
@@ -156,4 +173,3 @@ a:hover {
     color: black;
     font-size: 20px;
 }
-
