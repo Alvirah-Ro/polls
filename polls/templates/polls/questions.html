@@ -29,10 +29,10 @@
         </div>
         <div class="list">
             <h3>Question Lists:</h3>
-            {% if question_list_list %}
+            {% if all_lists %}
             <ul>
-                {% for key, question_list in question_list_list.items %}
-                <li><a href="{% url 'polls:list' question_list %}">{{ key }}</li>
+                {% for key, question_list in all_lists.items %}
+                <li><a href="{% url 'polls:question_list'%}">{{ key }}</li>
                 {% endfor %}
             </ul>
             {% else %}
@@ -46,9 +46,9 @@
             <h2>Most Popular Questions:</h2>
             <button for="question1" id="question1btn" onclick="showQuestions('question1')">Click Here</button>
             <div class="question" id="question1" style="display: none;">
-                {% if most_popular_question_list %}
+                {% if popular_questions %}
                 <ul>
-                    {% for question in most_popular_question_list %}
+                    {% for question in popular_questions %}
                     <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
                     {% endfor %}
                 </ul>
@@ -62,9 +62,9 @@
             <h2>Most Recent Questions:</h2>
             <button for="question2" id="question2btn" onclick="showQuestions('question2')">Click Here</button>
             <div class="question" id="question2" style="display: none;">
-                {% if latest_question_list %}
+                {% if latest_questions %}
                 <ul>
-                    {% for question in latest_question_list %}
+                    {% for question in latest_questions %}
                     <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
                     {% endfor %}
                 </ul>
@@ -77,8 +77,10 @@
         <div class="categories" style="background-color: rgb(196, 166, 223)">
             <h2>Oldest Questions:</h2>
             <button for="question3" id="question3btn" onclick="showQuestions('question3')">Click Here</button>
-            <div class="question" id="question3" style="display: none;" {% if earliest_question_list %} <ul>
-                {% for question in earliest_question_list %}
+            <div class="question" id="question3" style="display: none;">
+            {% if oldest_questions %} 
+            <ul>
+                {% for question in oldest_questions %}
                 <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
                 {% endfor %}
                 </ul>
@@ -91,8 +93,9 @@
         <div class="categories" style="background-color: rgb(166, 181, 223);">
             <h2>View All Questions:</h2>
             <button for="question4" id="question4btn" onclick="showQuestions('question4')">Click Here</button>
-            <div class="question" id="question4" style="display: none;" {% if all_question_list %} <ul>
-                {% for question in all_question_list %}
+            <div class="question" id="question4" style="display: none;"> 
+                {% if all_questions %} <ul>
+                {% for question in all_questions %}
                 <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
                 {% endfor %}
                 </ul>

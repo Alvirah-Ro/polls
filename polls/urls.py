@@ -10,7 +10,7 @@ app_name = "polls"
 urlpatterns = [
     path("", views.index_view, name="index"),
     path("<int:pk>/topic/", views.topic_view, name="topic"),
-    path("<int:key>/list/", views.),
+    path("question_list/", views.question_list_view, name="question_list"),
     path("questions/", views.question_view, name="questions"),
     path("<int:pk>/", views.DetailView.as_view(), name="detail"),
     path("<int:pk>/results/", views.ResultsView.as_view(), name="results"),

@@ -21,14 +21,11 @@ from .models import Topic, Question, Choice
 #         """Return a list of all topics"""
 #         return Topic.objects.all()
 
+
 def index_view(request):
     """This View is for the main page"""
-    # Get the 5 most recently added questions
-    latest_question_list = Question.objects.order_by("-pub_date")[:5]
+    return render (request, 'polls/index.html')
 
-    return render (request, 'polls/index.html', {
-        "latest_question_list": latest_question_list,
-    })
 
 def topic_view(request, pk):
     """This View lists all questions for a particular topic"""
@@ -43,10 +40,12 @@ def topic_view(request, pk):
         'topic': topic,  # Pass the Topic object
         'question_by_topic_list': questions  # Pass the filtered Questions
     })
- 
- def question_list_view(request):
+
+
+def question_list_view(request):
     """This View lists all questions in a particular list"""
-    questions = Questions.objects.filter()
+    return render(request, "polls/question_list.html")
+
 
 class DetailView(generic.DetailView):
     """This View displays details of a question with voting choices"""
@@ -62,25 +61,11 @@ class ResultsView(generic.DetailView):
 
 def question_view(request):
     """This View displays lists questions based on various parameters"""
-    latest_question_list = Question.objects.order_by("-pub_date")[:5]
-    earliest_question_list = Question.objects.order_by("pub_date")[:5]
-    questions = Question.objects.annotate(total_votes=Sum('choice__votes'))
-    most_popular_question_list = questions.order_by('-total_votes')[:5]
-    all_question_list = Question.objects.all()
-    # A list of all question lists
-    question_list_list = {"Latest Questions": latest_question_list, "Oldest Questions": earliest_question_list, "Most Popular Questions": most_popular_question_list, "All Questions": all_question_list}
     topic_list = Topic.objects.all()
-
-    context = {
-        "latest_question_list": latest_question_list,
-        "earliest_question_list": earliest_question_list,
-        "all_question_list": all_question_list,
-        "most_popular_question_list": most_popular_question_list,
-        "topic_list": topic_list,
-        "question_list_list": question_list_list
-    }
-
-    return render(request, "polls/questions.html", context)
+    return render(request, "polls/questions.html",
+        {
+            "topic_list": topic_list
+    })
 
 
 def vote(request, question_id):
