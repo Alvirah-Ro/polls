@@ -31,8 +31,9 @@
             <h3>Question Lists:</h3>
             {% if all_lists %}
             <ul>
-                {% for key, question_list in all_lists.items %}
-                <li><a href="{% url 'polls:question_list' key %}">{{ key }}</li>
+                {% for list_slug, list_info in all_lists.items %} # URL friendly name
+                <li><a href="{% url 'polls:question_list' list_slug %}">{{ list_info.0 }}</a></li>
+                # Readable name is used for link text
                 {% endfor %}
             </ul>
             {% else %}

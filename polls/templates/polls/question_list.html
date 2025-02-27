@@ -12,11 +12,15 @@
 <body>
 <div class="list">
     {% if list_name %}
-    <h1>{{ list_name }}</h1>
-        {% for question in question_list %}
-    <ul>
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-        {% endfor %}
+    <h1>{{ list_name }}</h1> <!--Readable name-->
+        {% if question_list %}
+        <ul>
+            {% for question in question_list %}
+            <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+            {% endfor %}
+        {% else %}
+        <p>There are no questions about {{ list_name }}</p>
+        {% endif %}
     </ul>
     {% else %}
         <p>There are no questions about this topic.</p>

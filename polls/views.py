@@ -3,11 +3,12 @@ View definitions for the Polls App
 """
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.db.models import F, Sum
+from django.db.models import F
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from polls.context_processors import get_question_lists  # Import function
 
 from .models import Topic, Question, Choice
 # Create your views here.
@@ -24,6 +25,7 @@ from .models import Topic, Question, Choice
 
 def index_view(request):
     """This View is for the main page"""
+
     return render (request, 'polls/index.html')
 
 
@@ -44,7 +46,15 @@ def topic_view(request, pk):
 
 def question_list_view(request, list_name):
     """This View lists all questions for a specific list based on the key in all_lists"""
-    return render(request, "polls/question_list.html")
+    print(f"Received list_name: {list_name}")
+    all_lists = get_question_lists() # Retrieve al lists
+    list_info = all_lists.get(list_name, ("Unknown List", [])) # Default if not found
+    readable_name, selected_list = list_info
+
+    return render(request, "polls/question_list.html", {
+        "list_name": readable_name, # Display the readable title
+        "question_list": selected_list,
+    })
 
 
 class DetailView(generic.DetailView):
@@ -62,6 +72,7 @@ class ResultsView(generic.DetailView):
 def question_view(request):
     """This View displays lists questions based on various parameters"""
     topic_list = Topic.objects.all()
+
     return render(request, "polls/questions.html",
         {
             "topic_list": topic_list
@@ -75,6 +86,7 @@ def vote(request, question_id):
         selected_choice = question.choice_set.get(pk=request.POST["choice"])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
+ 
         return render(
             request,
             "polls/detail.html",
@@ -106,6 +118,7 @@ def add_question(request):
 
         # Make sure at least 2 choices were entered
         if len(filtered_choices) < 2:
+
             return render(request, "polls/add_question.html", {
                 "topics": topics,
                 "error_message": "You must provice at least two choices.",
@@ -118,6 +131,7 @@ def add_question(request):
 
         # Check if all required fields are filled
         if not question_text or not topic_ids:
+
             return render(request, "polls/add_question.html", {
                 "topics": topics,
                 "error_message": "You didn't select all required fields.",
