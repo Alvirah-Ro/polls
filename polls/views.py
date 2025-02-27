@@ -42,8 +42,8 @@ def topic_view(request, pk):
     })
 
 
-def question_list_view(request):
-    """This View lists all questions in a particular list"""
+def question_list_view(request, list_name):
+    """This View lists all questions for a specific list based on the key in all_lists"""
     return render(request, "polls/question_list.html")
 
 

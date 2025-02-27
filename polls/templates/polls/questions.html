@@ -32,7 +32,7 @@
             {% if all_lists %}
             <ul>
                 {% for key, question_list in all_lists.items %}
-                <li><a href="{% url 'polls:question_list'%}">{{ key }}</li>
+                <li><a href="{% url 'polls:question_list' key %}">{{ key }}</li>
                 {% endfor %}
             </ul>
             {% else %}

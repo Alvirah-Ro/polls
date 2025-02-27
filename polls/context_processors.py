@@ -31,3 +31,9 @@ def all_questions(request):
 def all_lists(request):
     """ Combine all lists into a dictionary to add to the context """
     return {"all_lists": get_question_lists()}
+
+def specific_question_list(request):
+    """ Get a specific list from the request parameters """
+    list_name = request.GET.get("list_name") # Extract list name from GET params
+    selected_list = get_question_lists().get(list_name, []) # Get selected list or empty
+    return {"list_name": list_name, "question_list": selected_list}

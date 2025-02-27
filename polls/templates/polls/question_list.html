@@ -11,18 +11,16 @@
 
 <body>
 <div class="list">
-    {% if all_lists %}
-    {% for key, question_list in all_lists.items %}
-    <h1>{{ key }}</h1>
+    {% if list_name %}
+    <h1>{{ list_name }}</h1>
         {% for question in question_list %}
     <ul>
         <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
         {% endfor %}
     </ul>
-    {% endfor %}
     {% else %}
         <p>There are no questions about this topic.</p>
-{% endif %}
+    {% endif %}
 </div>
 
 <p class="homelink"><a href="{% url 'polls:index' %}">Back to all Questions</a></p>
