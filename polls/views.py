@@ -25,8 +25,12 @@ from .models import Topic, Question, Choice
 
 def index_view(request):
     """This View is for the main page"""
+    # Get the 5 most recently added questions
+    latest_questions = Question.objects.order_by("-pub_date")[:5]
 
-    return render (request, 'polls/index.html')
+    return render (request, 'polls/index.html', {
+        "latest_questions": latest_questions,
+    })
 
 
 def topic_view(request, pk):
