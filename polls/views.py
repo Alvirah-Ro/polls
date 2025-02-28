@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib import messages
 from polls.context_processors import get_question_lists  # Import function
 
 from .models import Topic, Question, Choice
@@ -163,21 +164,6 @@ def add_question(request):
         if topic_ids:
             question.topic.set(Topic.objects.filter(id__in=topic_ids))
 
-
-        # if topic_name:
-        #     topic, created = Topic.objects.get_or_create(
-        #     topic_name=topic_name,
-        #     defaults={'pub_date':timezone.now()}
-        # )
-        # if created:
-        #     topic_ids.append(topic.id)
-        #     question.topic.set(Topic.objects.filter(id__in=topic_ids))
-
-        # else:
-        #     # Add topics to the Question (ManyToManyField)
-        #     question.topic.set(Topic.objects.filter(id__in=topic_ids))
-
-
         # Create Choices linked to the question
         for choice_text in filtered_choices:
             Choice.objects.create(
@@ -187,6 +173,8 @@ def add_question(request):
             )
 
         # Redirect to index page after successful submission
+        # Include a message to indicate the question adding was successful
+        messages.success(request, "Your question has been successfully added!")
         return redirect(reverse("polls:index"))
 
     # If request method is GET, render the form

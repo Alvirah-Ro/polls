@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<div class="topic">
+<div class="list">
 {% if question_by_topic_list %}
     <h1>{{ topic.topic_name }}</h1>
     <ul>
@@ -23,7 +23,7 @@
 {% endif %}
 </div>
 
-<p class="homelink"><a href="{% url 'polls:index' %}">Back to all Questions</a></p>
+<a href="{% url 'polls:index' %}" class="btn">Back to Home Page</a>
 
 </body>
 

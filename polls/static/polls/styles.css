@@ -10,13 +10,16 @@ h1 {
     color: #18A2FF;
 }
 
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: "Kalam";
+h2, h3, h4, h5, h6 {
     color: #18A2FF;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: #7518FF;
 }
 
 .welcome {
@@ -32,78 +35,56 @@ h6 {
 
 .welcome2 {
     text-align: center;
+    font-family: "Kalam";
 }
 
-button {
-    text-align: center;
-    border-radius: 4px;
+.btns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  
+}
+
+.btn {
+    display: block;
     width: 300px;
     height: 50px;
+    background-color: #7518FF;
     color: white;
-    font-size: 1.2em;
+    font-size: 20px;
+    margin: 10px 0;
+    justify-self: center;
+    text-align: center;
+    border-style: solid;
+    border-color: black;
+    text-decoration: none;
+    margin: 30px 0;
+    padding: 8px;
+    cursor: pointer;
+
+}
+
+.btn:hover {
+    background-color: #18A2FF;
+    color: black;
+    text-decoration: underline;
+}
+
+.btn2 {
+    width: 200px;
+    height: 50px;
+    background-color: #18A2FF;
+    font-size: 20px;
+    margin: 10px 0;
     cursor: pointer;
 }
 
-.container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+.btn2:hover {
+    background-color: #0088E4;
+    text-decoration: underline;
 }
 
-.categories {
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    margin: 20px;
-    height: auto;
-    width: auto;
-    border-style: solid;
-    border-color: black;
-    padding: 20px;
-    line-height: 2;
+.messages .success {
+    color: green;
 }
-
-#categories {
-    margin: 32px 0;
-    text-align: center;
-}
-
-#question1btn {
-    background-color: orangered;
-}
-
-#question2btn {
-    background-color: hotpink;
-}
-
-#question3btn {
-    background-color: blueviolet;
-}
-
-#question4btn {
-    background-color: royalblue;
-}
-
-a {
-    color: black;
-}
-
-a:hover {
-    color: #7518FF;
-}
-
-.options {
-    padding: 20px;
-    display: grid;
-    justify-items: center;
-}
-
-.options a {
-    color: black;
-    padding: 20px 0;
-}
- .options a:hover {
-    color: #7518FF;
- }
 
 .list {
     margin: 20px;
@@ -113,8 +94,13 @@ a:hover {
     line-height: 2;
 }
 
-.recent h2 {
-    color: #18A2FF;
+.list h1 {
+    margin: 0 0 0 20px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 fieldset {
@@ -127,50 +113,14 @@ fieldset {
     margin-top: -30px;
 }
 
-legend h1,
-h2 {
-    color: #18A2FF;
-}
-
-#btn {
-    width: 200px;
-    height: 50px;
-    background-color: #18A2FF;
-    font-size: 20px;
-    margin: 10px 0;
-}
-
-#btn:hover {
-    background-color: #0088E4;
-}
-
-a {
-    color: black;
-}
-
-a:hover {
-    color: #7518FF;
-}
-
-.homelink a {
-    color: #FF182F;
-    padding: 20px 0;
-}
-
-.homelink a:hover {
-    color: #7518FF;
-}
-
-.topic {
-    margin: 20px;
+.input {
     padding: 20px;
-    border-style: solid;
-    border-color: #FF7518;
-    line-height: 2;
 }
 
-.topic h1 {
-    margin: 0 0 0 20px;
+.imput imput {
+    height: 30px;
+    width: 200px;
+    margin: 10px;
 }
 
 .results {

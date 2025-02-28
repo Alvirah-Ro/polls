@@ -21,40 +21,43 @@
         <fieldset>
 
             <legend>
-                <h1>Submit new questions here:</h1>
+                <h1>Submit New Questions Here: </h1>
             </legend>
             <div class="field">
-                <p>Enter question text and 2-5 possible answer options.</p>
-                <label for="question_text">Question Text</label>
-                <input type="text" name="question_text" id="question" required>
-                <br>
+                <h3>Enter question text and 2-5 possible answer options.</h3>
 
-                <label for="topic">Topics: select all that apply</label>
-                <select name="topic" multiple>
-                    {% for topic in topics %}
-                    <option value="{{ topic.id }}">{{ topic.topic_name }}</option>
-                    {% endfor %}
-                </select>
-
-                <label for="new_topic">Or add a new topic</label>
-                <input type="text" name="new_topic" id="new_topic">
-                <br>
-
-                <label for="choice1">Possible Answers:</label>
-                <input type="text" name="choice" id="choice1" required>
-                <input type="text" name="choice" id="choice2" required>
-                <input type="text" name="choice" id="choice3">
-                <input type="text" name="choice" id="choice4">
-                <input type="text" name="choice" id="choice5">
-                <br>
+                <div class="input">
+                    <label for="question_text">Question Text</label>
+                    <input type="text" name="question_text" id="question" required>
+                </div>
+                <div class="input">
+                    <label for="topic">Topics: select all that apply</label>
+                    <select name="topic" multiple>
+                        {% for topic in topics %}
+                        <option value="{{ topic.id }}">{{ topic.topic_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="input">
+                    <label for="new_topic">Or add a new topic</label>
+                    <input type="text" name="new_topic" id="new_topic">
+                </div>
+                <div class="input">
+                    <label for="choice1">Possible Answers:</label>
+                    <input type="text" name="choice" id="choice1" required>
+                    <input type="text" name="choice" id="choice2" required>
+                    <input type="text" name="choice" id="choice3">
+                    <input type="text" name="choice" id="choice4">
+                    <input type="text" name="choice" id="choice5">
+                </div>
             </div>
         </fieldset>
 
-        <button type="submit" value="add_question" id="btn">Submit</button>
+        <button type="submit" value="add_question" class="btn2">Submit</button>
 
     </form>
 
-    <p class="homelink"><a href="{% url 'polls:index' %}">Back to all Questions</a></p>
+    <a href="{% url 'polls:index' %}" class="btn">Back to Home Page</a>
 
 </body>
 
