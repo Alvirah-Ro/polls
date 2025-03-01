@@ -18,12 +18,12 @@
         {% csrf_token %}
         <fieldset>
             <legend>
-                <h1>{{ question.question_text }}</h1>
+                <h2>{{ question.question_text }}</h2>
             </legend>
             {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
             {% endif %}
-            <div class="field">
+            <div>
                 {% for choice in question.choice_set.all %}
                 <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
                 <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
@@ -34,8 +34,14 @@
         <input type="submit" value="Vote" class="btn2">
     </form>
 
-    <p class="homelink"><a href="{% url 'polls:index' %}">Back to Home Page</a></p>
-
+    <div class="btns">
+        <a href="{% url  'polls:questions' %}" class="btn">View All Question Categories</a>
+        <a href="{% url 'polls:add_question' %}" class="btn">Add a Question</a>
+    </div>
+    <div>
+        <a href="{% url 'polls:index' %}" class="btn">Back to Home Page</a>
+    </div>
+    
 </body>
 
 </html>

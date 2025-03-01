@@ -23,7 +23,13 @@
 {% endif %}
 </div>
 
-<a href="{% url 'polls:index' %}" class="btn">Back to Home Page</a>
+<div class="btns">
+    <a href="{% url  'polls:questions' %}" class="btn">View All Question Categories</a>
+    <a href="{% url 'polls:add_question' %}" class="btn">Add a Question</a>
+</div>
+<div>
+    <a href="{% url 'polls:index' %}" class="btn">Back to Home Page</a>
+</div>
 
 </body>
 
