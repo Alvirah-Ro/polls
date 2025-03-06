@@ -1,0 +1,8 @@
+{
+    "title": "Polls App",
+    "description": "An application for posting fun questions and voting on them.",
+    "image": "https://raw.githubusercontent.com/Alvirah-Ro/portfolio-site/main/assets/portfolio.png",
+    "github": "https://github.com/Alvirah-Ro/portfolio-site",
+    "liveDemo": "https://yourportfolio.com",
+    "technologies": ["Django", "Python"]
+}
