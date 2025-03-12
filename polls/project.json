@@ -2,7 +2,9 @@
     "title": "Polls App",
     "description": "A Django application for posting fun questions and voting on them.",
     "image": "https://raw.githubusercontent.com/Alvirah-Ro/polls/static/polls/PollsHomePage.jpg",
+    "image2": "https://raw.githubusercontent.com/Alvirah-Ro/polls/static/polls/QuestionCategories.jpg",
     "github": "https://github.com/Alvirah-Ro/polls",
     "liveDemo": "https://yourportfolio.com",
-    "technologies": ["Django", "Python"]
+    "technologies": ["Django", "Python"],
+    "longDescription": "This is a longer description of the Polls App.  I will think of more things to say about it.  People can vote on fun questions and see results.  People can add questions.  Questions can be sorted by topics or other parameters.  It is a Django App."
 }
