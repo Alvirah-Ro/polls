@@ -135,11 +135,11 @@ def add_question(request):
             )
 
         # Check if all required fields are filled
-        if not question_text or not topic_ids:
+        if not question_text or (not topic_ids and not topic_name):
 
             return render(request, "polls/add_question.html", {
                 "topics": topics,
-                "error_message": "You didn't select all required fields.",
+                "error_message": "You must provide question text and at least one topic.",
                 "question_text": question_text,
                 "selected_topic_ids": topic_ids,
                 "new_topic": topic_name,
@@ -158,7 +158,8 @@ def add_question(request):
         if topic_name:
             topic, _ = Topic.objects.get_or_create(
                 topic_name=topic_name,
-                pub_date=timezone.now())
+                defualts={"pub_date": timezone.now()}
+            )
             topic_ids.append(str(topic.id))
 
         if topic_ids:
