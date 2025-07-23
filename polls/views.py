@@ -158,7 +158,7 @@ def add_question(request):
         if topic_name:
             topic, _ = Topic.objects.get_or_create(
                 topic_name=topic_name,
-                defualts={"pub_date": timezone.now()}
+                defaults={"pub_date": timezone.now()}
             )
             topic_ids.append(str(topic.id))
 
