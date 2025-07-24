@@ -15,5 +15,6 @@ urlpatterns = [
     path("<int:pk>/", views.DetailView.as_view(), name="detail"),
     path("<int:pk>/results/", views.ResultsView.as_view(), name="results"),
     path("<int:question_id>/vote/", views.vote, name="vote"),
-    path("add", views.add_question, name="add_question")
+    path("add", views.add_question, name="add_question"),
+    path("questions/search", views.product_search_view, name="search")
 ]

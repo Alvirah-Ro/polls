@@ -14,6 +14,14 @@
 <body>
 
     <h1 id="categories">Question Categories</h1>
+
+    <div class="search">
+        <form method="GET" action="{% url 'polls:product_search' %}">
+            <input name="q" type="text" placeholder="Enter question search words?" value="{{ query }}">
+            <button class="search-button" type="submit">Search</button>
+        </form>
+    </div>
+
     <div class="container">
         <div class="list">
             <h3>Question Topics:</h3>

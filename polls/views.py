@@ -3,7 +3,7 @@ View definitions for the Polls App
 """
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.db.models import F
+from django.db.models import F, Q
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
@@ -11,7 +11,7 @@ from django.utils import timezone
 from django.contrib import messages
 from polls.context_processors import get_question_lists  # Import function
 
-from .models import Topic, Question, Choice
+from .models import models, Topic, Question, Choice
 # Create your views here.
 
 # class IndexView(generic.ListView):
@@ -181,7 +181,25 @@ def add_question(request):
     # If request method is GET, render the form
     return render(request, "polls/add_question.html", {"topics": topics})
 
+def product_search_view(request):
+    """This view defines how to search for keywords in all models"""
+    query = request.GET.get("q", "") # Get search query from URL parameter
 
+    if query:
+        questions = Question.objects.filter(Q(question_text__icontains=query))
+        choices = Choice.objects.filter(Q(choice_text__icontains=query)) 
+        topics = Topic.objects.filter(Q(topic_name__icontains=query))  
+    else:
+        questions = []
+        choices = []
+        topics = []
+
+    return render(request, "polls/search_results.html", {
+        "query": query,
+        "questions": questions,
+        "choices": choices,
+        "topics": topics,
+    })
 
 
 #class QuestionsView(generic.ListView):
