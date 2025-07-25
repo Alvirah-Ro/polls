@@ -11,6 +11,10 @@
 
 <body>
 <div class="list">
+    {% if query %}
+        <h1>Results for "{{ query }}"</h1>
+    {% endif %}
+
     {% if questions %}
     <ul>
         {% for question in questions %}
@@ -18,7 +22,7 @@
         {% endfor %}
     </ul>
     {% else %}
-        <p>There are no questions about this topic.</p>
+        <p>There are no results for this search.</p>
 {% endif %}
 </div>
 

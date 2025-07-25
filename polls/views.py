@@ -181,24 +181,26 @@ def add_question(request):
     # If request method is GET, render the form
     return render(request, "polls/add_question.html", {"topics": topics})
 
-def product_search_view(request):
+def question_search_view(request):
     """This view defines how to search for keywords in all models"""
     query = request.GET.get("q", "") # Get search query from URL parameter
+    questions = Question.objects.non()
 
     if query:
-        questions = Question.objects.filter(Q(question_text__icontains=query))
-        choices = Choice.objects.filter(Q(choice_text__icontains=query)) 
-        topics = Topic.objects.filter(Q(topic_name__icontains=query))  
-    else:
-        questions = []
-        choices = []
-        topics = []
+        questions = (
+            Question.objects.filter(
+                Q(question_text__icontains=query)  |
+                Q(topic_name__icontains=query)  | 
+                Q(choice__choice_text__icontains=query)
+            )
+            .select_related() # for foreign keys like topic
+            .prefetch_related("choice_set") # for reverse foreign key (choices)
+            .distinct()
+        )
 
-    return render(request, "polls/search_results.html", {
+    return render(request, "polls/questions/search.html", {
         "query": query,
         "questions": questions,
-        "choices": choices,
-        "topics": topics,
     })
 
 

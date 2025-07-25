@@ -105,6 +105,21 @@ a:hover {
     padding: 8px 0 0 0;
 }
 
+.search {
+    display: flex;
+    justify-content: center;
+}
+
+.search input {
+    width: 300px;
+    height: 30px;
+}
+
+.search button {
+    width: 100px;
+    height: 36px;
+}
+
 .list {
     display: block;
     margin: 20px;
