@@ -11,7 +11,7 @@ from django.utils import timezone
 from django.contrib import messages
 from polls.context_processors import get_question_lists  # Import function
 
-from .models import models, Topic, Question, Choice
+from .models import Topic, Question, Choice
 # Create your views here.
 
 # class IndexView(generic.ListView):
@@ -184,21 +184,22 @@ def add_question(request):
 def question_search_view(request):
     """This view defines how to search for keywords in all models"""
     query = request.GET.get("q", "") # Get search query from URL parameter
-    questions = Question.objects.non()
 
     if query:
         questions = (
             Question.objects.filter(
                 Q(question_text__icontains=query)  |
-                Q(topic_name__icontains=query)  | 
+                Q(topic__topic_name__icontains=query)  |
                 Q(choice__choice_text__icontains=query)
             )
             .select_related() # for foreign keys like topic
             .prefetch_related("choice_set") # for reverse foreign key (choices)
             .distinct()
         )
+    else:
+        questions = Question.objects.none()
 
-    return render(request, "polls/questions/search.html", {
+    return render(request, "polls/search.html", {
         "query": query,
         "questions": questions,
     })

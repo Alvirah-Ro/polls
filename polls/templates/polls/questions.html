@@ -13,10 +13,10 @@
 
 <body>
 
-    <h1 id="categories">Question Categories</h1>
+    <h1 id="categories" style="margin-bottom: 0;">Question Categories</h1>
 
     <div class="search">
-        <form method="GET" action="{% url 'polls:question_search' %}">
+        <form method="GET" action="{% url 'polls:search' %}">
             <input name="q" type="text" placeholder="Enter question search words" value="{{ query }}">
             <button class="search-button" type="submit">Search</button>
         </form>

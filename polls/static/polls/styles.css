@@ -108,16 +108,27 @@ a:hover {
 .search {
     display: flex;
     justify-content: center;
+    margin-bottom: 5px;
 }
 
 .search input {
-    width: 300px;
+    width: 240px;
     height: 30px;
 }
 
 .search button {
     width: 100px;
     height: 36px;
+    background-color: #7518FF;
+    color: white;
+    cursor: pointer;
+
+}
+
+.search button:hover {
+    background-color: #18A2FF;
+    color: black;
+    text-decoration: underline;
 }
 
 .list {
